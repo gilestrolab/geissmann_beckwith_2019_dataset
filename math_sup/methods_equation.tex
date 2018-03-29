@@ -2,49 +2,72 @@
 \usepackage{amsmath}
 \begin{document}
 
+
+\section*{Behavioural state}
+
+\begin{align}
+B = 
+\begin{cases}
+quiescence,            & \text{if } V_{max} < T_V \forall i\\
+micro\text{-}movement, & \text{if } \sum^{i}{d(i, i-1)} < T_d\\
+walking,               & \text{otherwise}
+\end{cases}
+\end{align}
+
+
+
+Where,
+\begin{itemize}
+	\item $V_{max}$ is the maximal velocity,
+	\item $T_V$ the validated threshold under which immobility is scored,
+	\item $d$ is the Euclidean distance,
+	\item $T_d$ is a threshold on the cumulative distance 24mm above which walking is scored
+\end{itemize}
+
+
 \section*{Rebound calculation}
 Formally, the homoeostatic rebound $H_i$ of an individual $i$ was expressed as:
 
-\begin{align*}
+\begin{align}
 H_i &=  R_i - \hat{R_i} \\
-\hat{R_i} &= \alpha + \beta{} B_i\\
-\end{align*}
+\hat{R_i} &= \alpha + \beta{} B_i
+\end{align}
 
 
 Where,
 \begin{itemize}
 	\item $\hat{R}$ is the \emph{predicted} sleep \emph{after} treatment ($ZT \in [0, 3]$),
 	\item $R$ is the \emph{measured} sleep \emph{after} treatment ($ZT \in [0, 3]$),
-	\item $B$ is the sleep measured \emph{before} after treatment ($ZT \in [0, 3]$), and
+	\item $B$ is the sleep measured \emph{before} treatment ($ZT \in [0, 3]$), and
 	\item $\alpha$ and $\beta$ are the coefficients of the linear regression $R_C = \alpha + \beta{B_C}$ on the control group $C$.
 \end{itemize}
 
-\begin{align*}
-\alpha &=  \bar{R_C} - beta\bar{B_C} \\
-\beta &= \frac{Cov(R_C, B_C)}{Var(B_C)}\\
-\end{align*}
+\begin{align}
+\alpha &=  \bar{R_C} - \beta\bar{B_C} \\
+\beta &= \frac{Cov(R_C, B_C)}{Var(B_C)}
+\end{align}
 
 
 \section*{Relative position}
 
-\begin{align*}
+\begin{align}
 position &=  \frac{X - Q_{0.01}(X)}{Q_{0.99}(X - Q_{0.01}(X))}
-\end{align*}
+\end{align}
 
 Where, $Q_n$  it the quantile function.
 
-First and last percentiles were used instead of minimum and maximum to avoid the possible effect of spurious artefactual detections -- beyond physical limits of the tube.
+First and last percentiles were used instead of minimum and maximum to avoid the possible effect of spurious artefactual detections beyond physical limits of the tube.
 %Note that this method implies that the animals are in close proximity to each at least 1\% of observations, which
 
 
 
 \section*{Hierarchical clustering}
 
-\begin{align*}
+\begin{align}
 D(p,q) &=  \frac{\sum_{t \in T}{BD_t(p_t,q_t)}}{|T|} \\
 BD_t(p_t,q_t) &= -\ln (BC(p_t,q_t))\\
 BC(p_t,q_t) &= \sum_{x\in X} \sqrt{p_t(x) q_t(x)}
-\end{align*}
+\end{align}
 
 
 Where,
