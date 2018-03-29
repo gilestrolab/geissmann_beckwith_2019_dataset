@@ -1,0 +1,60 @@
+\documentclass[a4paper,twoside,openright]{article}
+\usepackage{amsmath}
+\begin{document}
+
+\section*{Rebound calculation}
+Formally, the homoeostatic rebound $H_i$ of an individual $i$ was expressed as:
+
+\begin{align*}
+H_i &=  R_i - \hat{R_i} \\
+\hat{R_i} &= \alpha + \beta{} B_i\\
+\end{align*}
+
+
+Where,
+\begin{itemize}
+	\item $\hat{R}$ is the \emph{predicted} sleep \emph{after} treatment ($ZT \in [0, 3]$),
+	\item $R$ is the \emph{measured} sleep \emph{after} treatment ($ZT \in [0, 3]$),
+	\item $B$ is the sleep measured \emph{before} after treatment ($ZT \in [0, 3]$), and
+	\item $\alpha$ and $\beta$ are the coefficients of the linear regression $R_C = \alpha + \beta{B_C}$ on the control group $C$.
+\end{itemize}
+
+\begin{align*}
+\alpha &=  \bar{R_C} - beta\bar{B_C} \\
+\beta &= \frac{Cov(R_C, B_C)}{Var(B_C)}\\
+\end{align*}
+
+
+\section*{Relative position}
+
+\begin{align*}
+position &=  \frac{X - Q_{0.01}(X)}{Q_{0.99}(X - Q_{0.01}(X))}
+\end{align*}
+
+Where, $Q_n$  it the quantile function.
+
+First and last percentiles were used instead of minimum and maximum to avoid the possible effect of spurious artefactual detections -- beyond physical limits of the tube.
+%Note that this method implies that the animals are in close proximity to each at least 1\% of observations, which
+
+
+
+\section*{Hierarchical clustering}
+
+\begin{align*}
+D(p,q) &=  \frac{\sum_{t \in T}{BD_t(p_t,q_t)}}{|T|} \\
+BD_t(p_t,q_t) &= -\ln (BC(p_t,q_t))\\
+BC(p_t,q_t) &= \sum_{x\in X} \sqrt{p_t(x) q_t(x)}
+\end{align*}
+
+
+Where,
+\begin{itemize}
+\item $BD_t$ is the Bhattacharyya distance at a time interval $t$,
+\item $T$ is the set of all tested time intervals: $T=\{[0, 0.25), [0.25,0.5), ..., [23.75, 24)\} h$,
+\item $BC_t$ is the Bhattacharyya coefficient at a time interval $t$,
+\item $p$ and $q$ are the observed distributions of behaviour for two different individuals, and
+\item $X$ is a the set of discrete behaviours: $X = {quiescent, micromovement, walking}$.
+\end{itemize}
+
+\end{document}
+
