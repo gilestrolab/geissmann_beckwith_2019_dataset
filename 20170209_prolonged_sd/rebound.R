@@ -10,16 +10,20 @@ FEMALE_MALE_PALETTE <- c("#be2828ff", "#282896ff")
 CONTROL_SD_PALETTE <- c( "#969696ff", "#3caa3cff")
 METADATA <- "metadata.csv"
 CACHE <- "./cache/"
-RESULT_DIR <- "./raw_results/"
+#~ RESULT_DIR <- "./raw_results/"
+RESULT_DIR <- "/data/ethoscope_results/"
 REMOTE_DIR <- "ftp://nas.lab.gilest.ro/auto_generated_data/ethoscope_results/"
 
 met <- fread(METADATA)
 met <- met[status == "OK"]
-met <- link_ethoscope_metadata_remote(met,
-                                      remote_dir =  REMOTE_DIR,
-                                      result_dir = RESULT_DIR,
-                                      verbose = TRUE)
-                                      
+
+#~ met <- link_ethoscope_metadata_remote(met,
+#~                                       remote_dir =  REMOTE_DIR,
+#~                                       result_dir = RESULT_DIR,
+#~                                       verbose = TRUE)
+
+met <- link_ethoscope_metadata(met,
+                                      result_dir = RESULT_DIR)                                                                            
 dt <- load_ethoscope(met,
 					   max_time=days(20),
 					   reference_hour=9.0,
@@ -29,6 +33,7 @@ dt <- load_ethoscope(met,
 
 summary(dt)
                                       
+                             
 dt <- stitch_on(dt, on="uid")   
 
 curate_data <- function(data){
@@ -49,8 +54,6 @@ curate_data <- function(data){
 # then we apply this function to our data
 dt <- curate_data(dt)
 
-pl <- ggetho(dt[!is.infinite(xmv(death_date))], aes(y=paste(as.Date(datetime),  id), z=asleep)) + 
-			stat_tile_etho() 
 
 
 #~ pl
@@ -366,4 +369,25 @@ for(p_name in names(all_pl_objs)){
     pl <- all_pl_objs[[which(names(all_pl_objs) == p_name)]]
     print(pl + ggtitle(p_name))
 }
+dev.off()
+
+
+stim_dt <- dt[t > days(1) &  t < days(10) & xmv(treatment) == "SD"]
+
+stim_dt <-behavr::bin_apply_all(stim_dt, y=interactions, x_bin_length=mins(30), FUN=sum)
+
+stim_simple_dt <- rejoin(stim_dt)[, .(N_stimuli = mean(interactions)), by="t,sex"]
+
+ggplot(stim_simple_dt, aes(x=t, y=N_stimuli, colour=sex)) + geom_line()
+
+pdf("seasonal_decomposition_N_stimulus.pdf", w=8, h=4.5)
+tmp_ts <- ts(stim_simple_dt[sex=="M", N_stimuli],  frequency=48) # 48 obervations a day
+s <- stl(tmp_ts,s.window="per")
+apply(s$time.series,2, var) / var(tmp_ts)
+plot(s)
+
+tmp_ts <- ts(stim_simple_dt[sex=="F", N_stimuli],  frequency=48) # 48 obervations a day
+s <- stl(tmp_ts,s.window="per")
+apply(s$time.series,2, var) / var(tmp_ts)
+plot(s)
 dev.off()
