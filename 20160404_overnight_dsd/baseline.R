@@ -127,13 +127,13 @@ stat_summary_dt5min <- dt5min[,
 							  by="id"
 							]
 
-<<<<<<< HEAD
+#~ <<<<<<< HEAD
 #~ ggetho(dt5min, aes(t, z=asleep, y=sprintf("%04d|%s", rank_asleep, id))) + stat_tile_etho()
 #~ ggetho(dt5min, aes(t, z=!moving, y=sprintf("%04d|%s", rank_asleep, id))) + stat_tile_etho()
-=======
+#~ =======
 ggetho(dt5min, aes(t, z=asleep, y=sprintf("%04d|%s", rank_asleep, id))) + stat_tile_etho()
 ggetho(dt5min, aes(t, z=!moving, y=sprintf("%04d|%s", rank_asleep, id))) + stat_tile_etho()
->>>>>>> ad95bd0e2e80b63e427104d671dd03862af1b82c
+#~ >>>>>>> ad95bd0e2e80b63e427104d671dd03862af1b82c
 
 
 ggplot(stat_summary_dt5min, aes(mean_sleep)) + geom_histogram(bins=100)
@@ -334,7 +334,16 @@ dt[, behaviour:= ordered(c("q","m","w")[behaviour], levels = c("q","m","w"))]
 dt[, micro.mov. := (behaviour == "m")]
 dt[, walking := (behaviour == "w")]
 dt[, quiescent := (behaviour == "q")]
-
+# test
+pdf("walking_threshold_validation.pdf", w=6, h=6)
+ggplot(dt[behaviour != "q" & xmv(sex) == "F"], aes(walked_dist * 60)) + 
+			geom_histogram(aes(y=100 * ..count../sum(..count..)), bins=200) + 
+			scale_x_sqrt(limits=c(0, 3), name=expression(Total~distance~moved~(mm.min^{-1})), breaks= 60 * c(0.1, 0.2, 0.5,1,2)) +
+			scale_y_continuous(name= "Density (%)") +
+			geom_vline(xintercept= 60 *.25, size=2, colour="red") 
+dev.off()
+# ggplot(dt[behaviour != "q" & xmv(sex) == "M"], aes(walked_dist)) + geom_histogram() + scale_x_log10()+ geom_vline(xintercept=.25)
+# ggplot(dt[behaviour != "q" & xmv(sex) == "F"], aes(walked_dist)) + geom_histogram() + scale_x_log10()+ geom_vline(xintercept=.25)
 
 #~ pl <- ggetho(dt[xmv(sex)=="F"], aes(t, z=micro.mov.)) + stat_tile_etho()
 #~ print(pl)

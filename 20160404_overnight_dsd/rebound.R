@@ -338,6 +338,12 @@ for(p_name in names(all_pl_objs)){
 }
 dev.off()
 
+#~ pdf("stimulus_Y_axis_breaks.pdf", w=12,h=6)
+#~ all_pl_objs$bar_interactions <- ggplot(stat_rebound_dt, aes(interval, interactions, colour=treatment)) + 
+#~ 																layer_barpl() + 
+#~ 																scale_y_sqrt(breaks = c(20, 50, 100, 200, 500, 1000))
+#~ dev.off()
+
 
 #############################################
 pdf("rebound_quantif_expl.pdf", h=4,w=4)
@@ -555,3 +561,13 @@ ggetho(bdt[xmv(sdi) %in% c(0,10)], aes(y=duration, fill=treatment),summary_FUN=m
 
 dev.off()
 
+
+
+all_pl_objs$bar_interactions <- ggplot(stat_rebound_dt, aes(interval, interactions, colour=treatment)) + layer_barpl() + scale_y_sqrt()
+
+write.csv(
+stat_rebound_dt[ treatment != "Control", .(
+						interaction_mean = mean(interactions),
+						interaction_sd = sd(interactions)
+						), by="interval,sex"],
+						file="interaction_mean_sd_per_group.csv", row.names=F)
