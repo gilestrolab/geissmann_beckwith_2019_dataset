@@ -3,27 +3,6 @@
 \begin{document}
 
 
-\section*{Behavioural state}
-
-\begin{align}
-B = 
-\begin{cases}
-quiescence,            & \text{if } V_{max} < T_V \forall i\\
-micro\text{-}movement, & \text{if } \sum^{i}{d(i, i-1)} < T_d\\
-walking,               & \text{otherwise}
-\end{cases}
-\end{align}
-
-
-
-Where,
-\begin{itemize}
-	\item $V_{max}$ is the maximal velocity,
-	\item $T_V$ the validated threshold under which immobility is scored,
-	\item $d$ is the Euclidean distance,
-	\item $T_d$ is a threshold of 15 mm on the cumulative distance above which walking is scored
-\end{itemize}
-
 
 \section*{Rebound calculation}
 Formally, the homoeostatic rebound $H_i$ of an individual $i$ was expressed as:
@@ -46,6 +25,30 @@ Where,
 \alpha &=  \bar{R_C} - \beta\bar{B_C} \\
 \beta &= \frac{Cov(R_C, B_C)}{Var(B_C)}
 \end{align}
+
+
+\section*{Behavioural state}
+
+\begin{align}
+B = 
+\begin{cases}
+quiescence,            & \text{if } V_{max} < T_V \forall i\\
+micro\text{-}movement, & \text{if } \sum^{i}{|X_i - X_{i-1}|} < T_d\\
+walking,               & \text{otherwise}
+\end{cases}
+\end{align}
+
+
+
+Where,
+\begin{itemize}
+	\item $V_{max}$ is the maximal velocity,
+	\item $T_V$ the validated threshold under which immobility is scored,
+	\item $X$ is the position along the tube,
+	\item $T_d$ is a threshold of 15 mm on the distance moved above which $walking$ is scored.
+\end{itemize}
+
+The $T_d$ was defined empirically based on the observation of a bimodal distribution of the total distance moved in a minute.
 
 
 \section*{Relative position}
@@ -76,7 +79,7 @@ Where,
 \item $T$ is the set of all tested time intervals: $T=\{[0, 0.25), [0.25,0.5), ..., [23.75, 24)\} h$,
 \item $BC_t$ is the Bhattacharyya coefficient at a time interval $t$,
 \item $p$ and $q$ are the observed distributions of behaviour for two different individuals, and
-\item $X$ is a the set of discrete behaviours: $X = {quiescent, micro\text{-}movement, walking}$.
+\item $X$ is a the set of discrete behaviours: $X = \{quiescent, micro\text{-}movement, walking\}$.
 \end{itemize}
 
 \end{document}
