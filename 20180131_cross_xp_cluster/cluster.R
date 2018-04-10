@@ -286,10 +286,11 @@ a <- dendrapply(dend2, function(x){
 library(ape)
 pdf("unrooted_dendro.pdf")
 tree <- as.phylo(dend2)
-
+labs <- tree$tip.label
 tree$tip.label <- rep(".", times=N)
 cols <- MY_PALETTE[met[labs,group]]
 plot(tree, show.tip.label=T, lab4ut="axial", tip.color = cols , edge.color=l[3:(N*2)], cex=1.5, type="unrooted")
+add.scale.bar(cex = 1.5, font = 2)
 dev.off()
 
 #~ obj <- as.phylo(dend2)
