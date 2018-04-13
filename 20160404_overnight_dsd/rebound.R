@@ -251,6 +251,8 @@ ggplot(stat_rebound_dt, aes(x=quiet_baseline_day3h, y=quiet_rebound_day3h)) + ge
 summary(lm(quiet_rebound_day3h ~ quiet_baseline_day3h *  sex, stat_rebound_dt[treatment == "Control"]))
 summary(lm(sleep_rebound_day3h ~ sleep_baseline_day3h *  sex, stat_rebound_dt[treatment == "Control"]))
 
+
+
 ggplot(stat_rebound_dt[sdi %in% c(0, 10)], aes(x=quiet_baseline_day3h, y=quiet_rebound_day3h, colour=treatment)) + geom_point(alpha=1) + facet_grid(sex ~ .) + 
 			#geom_smooth(data=stat_rebound_dt[treatment=="Control"])
 			geom_smooth(method = "lm")
@@ -266,6 +268,87 @@ all_pl_objs$bar_quiet_reb_day3h_min_baseline <- ggplot(stat_rebound_dt, aes(inte
 all_pl_objs$bar_quiet_reb_day3h_diff <- ggplot(stat_rebound_dt, aes(interval, quiet_rebound_day3h_diff * 3 * 60, colour=treatment)) + layer_barpl() +
 						geom_hline(yintercept=0, colour="red", linetype=2) + scale_y_continuous(name="Extra quiescence in 3h (min)")
 
+
+
+### sleep/quiescence loss  vs rebound
+#ggplot(stat_rebound_dt, aes(x=quiet_baseline_day, y=quiet_rebound_day)) + geom_point(alpha=.3) + facet_grid(sex ~ .) + scale_x_sqrt()+ scale_y_sqrt()
+summary(lm(quiet_sd_night ~ quiet_baseline_night *  sex, stat_rebound_dt[treatment == "Control"]))
+summary(lm(sleep_sd_night ~ sleep_baseline_night *  sex, stat_rebound_dt[treatment == "Control"]))
+
+
+
+ggplot(stat_rebound_dt[sdi %in% c(0, 10)], aes(x=quiet_baseline_night, y=quiet_sd_night, colour=treatment)) + geom_point(alpha=1) + facet_grid(sex ~ .) + 
+			#geom_smooth(data=stat_rebound_dt[treatment=="Control"])
+			geom_smooth(method = "lm")
+
+
+mod <- lm(quiet_sd_night ~ quiet_baseline_night * sex, stat_rebound_dt[sdi == 0])
+
+stat_rebound_dt[, quiet_sd_night_pred := predict(mod, stat_rebound_dt)]
+stat_rebound_dt[, quiet_sd_night_diff := quiet_sd_night - quiet_sd_night_pred]
+
+
+ggplot(stat_rebound_dt, aes(interval, - quiet_sd_night_diff * 12 * 60, colour=treatment)) + layer_barpl() +
+						geom_hline(yintercept=0, colour="red", linetype=2) + scale_y_continuous(name="Loss quiescence in 12h (min)")
+
+ggplot(stat_rebound_dt[treatment =="SD"], aes( - quiet_sd_night_diff * 12 * 60, quiet_rebound_day3h_diff * 3 * 60, colour=sdi)) +
+						geom_point() +
+						geom_smooth(method="lm") +
+						scale_x_continuous(name="Loss quiescence during SD (min)") +
+						scale_y_continuous(name="Extra quiescence in rebound (min)") + 
+						facet_grid(interval ~ sex) 
+
+mod <- lm(quiet_rebound_day3h_diff  ~  quiet_sd_night_diff   * interval,stat_rebound_dt[sex == "F"& treatment =="SD"])
+
+ggplot(stat_rebound_dt, aes( quiet_sd_night_diff * 12 * 60, interactions, colour=sex)) +
+						geom_point() +
+						#geom_smooth(method="lm") +
+						scale_x_continuous(name="Extra Quiescence during SD (min)") +
+						scale_y_sqrt(name="N_interations") + 
+						facet_wrap( ~ interval) 						
+
+ggplot(stat_rebound_dt[treatment =="SD"], aes( - quiet_sd_night_diff * 12 * 60, interactions, colour=sdi)) +
+						geom_point() +
+						geom_smooth(method="lm", mapping=aes(fill=interval)) +
+						geom_smooth(method="lm") +
+						scale_x_continuous(name="Loss quiescence during SD (min)") +
+						scale_y_sqrt(name="N_interations") + 
+						facet_wrap( ~ sex) 
+
+
+ggplot(stat_rebound_dt[treatment =="SD"], aes( - quiet_sd_night_diff * 12 * 60, quiet_rebound_day3h_diff * 3 * 60, colour=sleep_sd_night > .20)) +
+						geom_point() +
+						geom_smooth(method="lm") +
+						scale_x_continuous(name="Loss quiescence during SD (min)") +
+						scale_y_continuous(name="Extra quiescence in rebound (min)") + 
+						facet_grid( interval ~ sex) 
+
+
+ggplot(stat_rebound_dt, aes( quiet_baseline_night * 12 * 60, quiet_sd_night * 12 * 60)) +
+						geom_point() +
+						geom_smooth(method="lm") +
+						scale_x_continuous() +
+						#scale_y_sqrt(name="N_interations") + 
+						facet_grid( interval ~ sex) 
+
+
+ggplot(stat_rebound_dt[treatment =="SD"], aes( quiet_rebound_day3h_diff* 3 * 60, interactions, colour=sdi)) +
+						geom_point() +
+						geom_smooth(method="lm", mapping=aes(fill=interval)) +
+						geom_smooth(method="lm") +
+						scale_x_continuous(name="Extra quiescence in rebound (min)") 
+						scale_y_sqrt(name="N_interations") + 
+						facet_wrap( ~ sex) 								
+										
+#~ all_pl_objs$bar_quiet_reb_day3h_min_baseline <- ggplot(stat_rebound_dt, aes(interval, quiet_rebound_day3h - quiet_baseline_day3h, colour=treatment)) + layer_barpl()
+#~ all_pl_objs$bar_quiet_reb_day3h_diff <- ggplot(stat_rebound_dt, aes(interval, quiet_rebound_day3h_diff * 3 * 60, colour=treatment)) + layer_barpl() +
+#~ 						geom_hline(yintercept=0, colour="red", linetype=2) + scale_y_continuous(name="Extra quiescence in 3h (min)")
+
+
+
+
+
+###
 
 summ_stat <- stat_rebound_dt[,{
 				w = wilcox.test(quiet_rebound_day3h_diff, mu=0, alternative="greater")
