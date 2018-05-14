@@ -4,7 +4,7 @@ library(scopr)
 library(ggetho)
 library(sleepr)
 #~ library(gtools)
-#~ source("../ggplot_themes.R")
+source("../ggplot_themes.R")
 
 FEMALE_MALE_PALETTE <- c("#be2828ff", "#282896ff")
 CONTROL_SD_PALETTE <- c( "#969696ff", "#3caa3cff")
@@ -35,29 +35,129 @@ dt <- load_ethoscope(met,
 					   ncores=1)
 
 summary(dt)
-                                      
-#~ write(sort(unique(sapply(dt[,file_info, meta=T], function(x)x$path))), "./all_db_files.txt")                             
-#~ VIDEO_MAKER="/home/quentin/comput/ethoscope-git/scripts/tools/db2video.py"
-#~ OUTPUT_DIR="/home/quentin/Desktop/long_sd_videos/"
-#~ for f in $(cat all_db_files.txt)
-#~ do
-#~ echo "~~~~~~~~~~~~~~~~~ converting $(basename $f) ~~~~~~~~~~~~~~~~~~~~~"
-#~ python2  $VIDEO_MAKER -a -i $f -o $OUTPUT_DIR/$(basename $f).mp4 -f 10
-#~ done
-
-
-
+    
 dt_stchd <- stitch_on(dt, on="unique_ID") 
 dt_stchd[, walking := max_velocity > 2.5]
 
 
 
-ggetho(dt_stchd[xmv(incubator) == 8], aes(y=paste(incubator,sex, id), z=walking)) + 
-        stat_tile_etho() + 
-        stat_ld_annotations()
+dt_stchd <- dt_stchd[xmv(fly_obs) != "food"]
+dt_stchd <- dt_stchd[xmv(days_alive) != "non"]
+dt_stchd[, days_alive := as.numeric(days_alive), meta=T]
+dt_stchd[, right_censored := ifelse(fly_obs == "ok", F, T), meta=T]
+
+dt_stchd[, max_t := days(days_alive) - days(1), meta=T]
+
+
+pl1 <- ggetho(dt_stchd, aes(z=asleep)) + stat_tile_etho() + scale_x_days(limits=c(0,days(60)))
+pl2 <- ggetho(dt_stchd[t < xmv(max_t)], aes(z=asleep)) + stat_tile_etho() + scale_x_days(limits=c(0,days(60)))
+
+pl3 <- ggetho(dt_stchd[t < xmv(max_t)], aes(z=asleep, y=interaction(id, days_alive, treatment, sex))) + stat_tile_etho() + scale_x_days()
+pdf("./tile_plots.pdf", w=32, h=16)
+pl1
+pl2
+pl3
+dev.off()
+
+
+dt_stchd_curated <- dt_stchd[t < days(xmv(days_alive))]
+
+palette <- CONTROL_SD_PALETTE
+
+layers <- list(
+    #stat_pop_etho(method= mean_cl_boot),
+    stat_pop_etho(),
+    facet_grid( sex ~ .),
+    stat_ld_annotations(),
+#    coord_cartesian(xlim = c(days(-3),days(12))),
+    scale_y_continuous(limits = c(NA,1)),
+    scale_fill_manual(values=palette),
+    scale_colour_manual(values=palette), 
+    ethogram_theme
+    )
+
+all_pl_objs <- list()
+all_pl_objs$etho_sleep <- ggetho(dt_stchd_curated,
+                                    aes(y = asleep, fill=treatment)) +
+									layers
+
+
+
+
+
+dt_stchd_curated[, t := t - days(xmv(baseline))]
+
+
+#ggetho(dt_stchd_curated, aes(z=asleep, y=interaction(id, days_alive, treatment, sex))) + stat_tile_etho()
+stat_rebound_dt <- rejoin(
+						dt_stchd_curated[,
+						.(
+						overall_sleep = mean(asleep[t > hours(12)]),
+						overall_sleep_10d = mean(asleep[t > hours(12) & t < days(10)]),
+						interactions = sum(interactions)
+						)
+						,by = id]
+						)
+
+
+
+
+ggplot(stat_rebound_dt, aes()) + ()
+
+ggplot(stat_rebound_dt, aes(x=overall_sleep_10d, y=days_alive, colour=sex, shape=sex)) + 
+				geom_point() + 
+				geom_smooth(method="lm") +
+				facet_grid( treatment ~ .)
+
+
+
+
+
+##############################################################################
+mod <- lm( days_alive ~ treatment * sex,dt_stchd[right_censored == F, meta=T])
+summary(mod)
+
+mod <- lm( days_alive ~ treatment ,dt_stchd[right_censored == F, meta=T])
+summary(mod)
+
+
+mod <- lm( days_alive ~ treatment ,dt_stchd[right_censored == F & sex=="female", meta=T])
+summary(mod)
+
+
+
+
+
+
+library(survminer)
+library(survival)
+
+#surv_data <- fread("/tmp/prolonged_sd_stat_dt.csv")
+surv_data <- dt_stchd[meta=T]
+# animals are 2 days old when we start recording. 
+surv_data[, days_alive := days_alive + 2]
+
+surv_data[, dead := 2- right_censored ] # dead = 2, censored = 1
+#surv_data[, lifespan_baseline := lifespan - baseline_days]
+#surv_data[, lifespan_baseline := ifelse(is.infinite(lifespan), 10,lifespan - baseline_days)]
+
+s <- survfit(Surv(days_alive, dead) ~ sex + treatment, data = surv_data)
+ggsurv <- ggsurvplot_facet(s, data=surv_data, conf.int = TRUE, palette=rep(CONTROL_SD_PALETTE, 2), facet.by="sex", nrow=2) + theme_grey()
+
+pdf("sd_until_death_surv.pdf", w=12,h=6)
+ggsurv + scale_y_continuous(labels = scales::percent) + scale_x_continuous(name="age (d)") + 
+		 geom_vline(xintercept=6, size=1, linetype=2)	+
+		 coord_cartesian(xlim=c(0,55) )
+dev.off()
+
+
+
+#~ ggetho(dt_stchd[xmv(incubator) == 8], aes(y=paste(incubator,sex, id), z=walking)) + 
+#~         stat_tile_etho() + 
+#~         stat_ld_annotations()
         
-crashed_etho_ids <- dt_stchd[ inc_crash != "no" | machine_name == "ETHOSCOPE_024",id,meta=T]
-dt_stchd <- dt_stchd[!id %in% crashed_etho_ids]
+#~ crashed_etho_ids <- dt_stchd[ inc_crash != "no" | machine_name == "ETHOSCOPE_024",id,meta=T]
+#~ dt_stchd <- dt_stchd[!id %in% crashed_etho_ids]
 
 dt_stchd[, death_date := as.POSIXct(sprintf("%s-2018 09:00:00", week_death), format="%d-%m-%Y %H:%M:%S", tz="UTC"), meta=T]
 dt_stchd[, max_t := as.numeric(death_date - as.POSIXct(paste(as.character(as.Date(datetime)),"09:00:00"), tz="UTC"), unit="secs"),meta=T]
