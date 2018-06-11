@@ -232,7 +232,7 @@ print(pl)
 
 pl <- ggplot(dt[sex=="F", meta=T], aes(y= mean_asleep, x=sprintf("%04d|%s", rank_asleep, id), fill = has_video)) + layers_bars
 print(pl)
-pl <- ggetho(dt[xmv(sex)=="F" & xmv(has_video) == T], aes(t, z=asleep, y=sprintf("%04d|%s -> %s|%02d", rank_asleep, id, video_id, video_region_id))) + layers
+pl <- ggetho(dt[xmv(sex)=="F" & xmv(has_video) == T], aes(t, z=asleep, y=sprintf("%04d|%s , %s|%02d", rank_asleep, id, video_id, video_region_id))) + layers
 print(pl)
 pl <- ggplot(dt[sex=="F", meta=T], aes(y= mean_asleep, x=sprintf("%04d|%s", rank_asleep, id))) + layers_bars
 print(pl)
@@ -338,7 +338,7 @@ dt[, quiescent := (behaviour == "q")]
 pdf("walking_threshold_validation.pdf", w=6, h=6)
 ggplot(dt[behaviour != "q" & xmv(sex) == "F"], aes(walked_dist * 60)) + 
 			geom_histogram(aes(y=100 * ..count../sum(..count..)), bins=200) + 
-			scale_x_sqrt(limits=c(0, 3), name=expression(Total~distance~moved~(mm.min^{-1})), breaks= 60 * c(0.1, 0.2, 0.5,1,2)) +
+			scale_x_sqrt(limits = 60 * c(0, 3), name=expression(Total~distance~moved~(mm.min^{-1})), breaks= 60 * c(0.1, 0.2, 0.5,1,2)) +
 			scale_y_continuous(name= "Density (%)") +
 			geom_vline(xintercept= 60 *.25, size=2, colour="red") 
 dev.off()
@@ -351,11 +351,10 @@ dev.off()
 colours <- c("#999999ff", "#4e9a06ff", "#0070b0ff")
 tdt <- copy(dt[xmv(has_video) == T & t < days(2)])
 
-
-#tdt[ , id2 := sprintf("%04d|%s", xmv(rank_asleep), id)] 
+tdt[ , id2 := sprintf("%04d|%s", xmv(rank_asleep), id)] 
 
 # add sleep fraction in the in the title y label
-tdt[ , id2 := sprintf("%04d|%f|%s", xmv(rank_asleep),round(xmv(mean_asleep),4), id)] 
+
 tdt[ , id2 :=  factor(id2, levels=c(rev(sort(unique(id2)))))] 
 
 pl <- ggplot(tdt, aes(t / hours(1),x_rel)) + 
@@ -371,12 +370,42 @@ pl <- pl + 	scale_x_continuous(breaks=c(0:8 * 6), name="Time (h)") +
 		theme(panel.spacing = unit(0, "cm"), strip.text.y = element_text(angle = -0))+
 		coord_cartesian(ylim = c(0,1))
 		
-		
+tdt <- copy(dt[xmv(sex) == "F" & t < days(2)])		
+tdt[ , id2 := sprintf("%04d|%f|%s", xmv(rank_asleep),round(xmv(mean_asleep),4), id)] 
+tdt[ , id2 :=  factor(id2, levels=c(rev(sort(unique(id2)))))] 
+sorted_id2 <- tdt[,sort(unique(id2))]
+
+id2_groups <- split(sorted_id2,floor(1:length(sorted_id2)/10))
+
+pdf("/tmp/all_female_behaviours.pdf", h=16,w=24)
+for(i in  id2_groups){
 	
+	if(length(i) < 10){
+		extra <- paste0("No_Invididual_",(1+length(i)):10)
+	}
+	else{
+		extra <-  character(0)
+	}
+		
+	sdt <- copy(tdt[id2 %in% i])
+	levs <- c(as.character(i),extra)
+	print(levs)
+	sdt[,id2 := factor(as.character(id2), levels=levs)]
+	pl <- ggplot(sdt, aes(t / hours(1),x_rel)) + 
+			geom_rect(mapping=aes(xmin=(t) /hours(1), xmax=(60+t)/hours(1),fill=behaviour), ymin=-1, ymax=1, alpha=.90)+
+			geom_line() +
+			scale_fill_manual(values=colours) +
+			geom_hline(yintercept=.5, linetype=2, alpha=.5, size=2) +
+			facet_grid(id2 ~ .,drop=F) 
+		
+			
+	pl <- pl + 	scale_x_continuous(breaks=c(0:8 * 6), name="Time (h)") + 
+		scale_y_continuous(breaks=c(0, 0.25, 0.5, 0.75), name="Position (rel)") + 
+		theme(panel.spacing = unit(0, "cm"), strip.text.y = element_text(angle = -0))+
+		coord_cartesian(ylim = c(0,1))
 print(pl)
+	}
 dev.off()
-
-
 dt[, hour := (floor(t/hours(.25)) * .25) %% 24 ]
 #~ tern_dt_wide[,
 #~ 			sleep_group := make_sleep_group(rank_asleep),
