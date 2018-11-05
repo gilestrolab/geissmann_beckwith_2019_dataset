@@ -1,0 +1,14 @@
+[0] Config.pm:302> INFO - This is Biber 2.11 running in TOOL mode
+[0] Config.pm:304> INFO - Config file is 'biblatex-to-bibtex.conf'
+[0] Config.pm:305> INFO - Logfile is 'Geismmann_Beckwith_mat_and_met.bib.blg'
+[17] biber:313> INFO - === Tue Jul  3, 2018, 17:56:50
+[36] Biber.pm:4132> INFO - Looking for bibtex format file 'Geismmann_Beckwith_mat_and_met.bib'
+[37] bibtex.pm:1500> INFO - LaTeX decoding ...
+[52] bibtex.pm:1316> INFO - Found BibTeX data source 'Geismmann_Beckwith_mat_and_met.bib'
+[103] UCollate.pm:68> INFO - Overriding locale 'en_US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[103] UCollate.pm:68> INFO - Overriding locale 'en_US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[103] Biber.pm:3804> INFO - Sorting list 'tool/global//global/global' of type 'entry' with template 'tool' and locale 'en_US'
+[103] Biber.pm:3810> INFO - No sort tailoring available for locale 'en_US'
+[108] bibtex.pm:343> INFO - Writing 'test.bib' with encoding 'ascii'
+[108] bibtex.pm:344> INFO - Converting UTF-8 to TeX macros on output
+[108] bibtex.pm:373> INFO - Output to test.bib

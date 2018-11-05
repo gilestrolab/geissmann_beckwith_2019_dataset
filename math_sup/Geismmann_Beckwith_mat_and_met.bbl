@@ -1,0 +1,40 @@
+\begin{thebibliography}{10}
+
+\bibitem{geissmann_ethoscopes:_2017}
+Q.~Geissmann, {\it et~al.\/}, {\it {PLOS} Biology\/} {\bf 15}, e2003026 (2017).
+
+\bibitem{hurlbert_pseudoreplication_1984}
+S.~H. Hurlbert, {\it Ecological Monographs\/} {\bf 54}, 187 (1984).
+
+\bibitem{sokal_statistical_1958}
+R.~R. Sokal, C.~D. Michener, {\it A Statistical Method for Evaluating
+  Systematic Relationships\/} (University of Kansas).
+
+\bibitem{bhattacharyya_measure_1943}
+A.~Bhattacharyya, {\it Bulletin of the Calcutta Mathematical Society\/} {\bf
+  35}, 99 (1943).
+
+\bibitem{efron_bootstrap_1979}
+B.~Efron, {\it The Annals of Statistics\/} {\bf 7}, 1 (1979).
+
+\bibitem{akritas1986bootstrapping}
+M.~G. Akritas, {\it Journal of the American Statistical Association\/} {\bf
+  81}, 1032 (1986).
+
+\bibitem{r}
+{R Core Team}, {\it R: A Language and Environment for Statistical Computing\/},
+  R Foundation for Statistical Computing, Vienna, Austria (2018).
+
+\bibitem{geissmann_rethomics:_2018}
+Q.~Geissmann, L.~G. Rodriguez, E.~J. Beckwith, G.~F. Gilestro, {\it
+  {bioRxiv}\/} p. 305664 (2018).
+
+\bibitem{wickam_hadley_ggplot2_2009}
+{Wickam, Hadley}, {\it ggplot2 - Elegant Graphics for Data Analysis\/}
+  (Springer, 2009).
+
+\bibitem{hamilton_ggtern:_2017}
+N.~Hamilton, {\it ggtern: An Extension to `ggplot2', for the Creation of
+  Ternary Diagrams\/} (2017).
+
+\end{thebibliography}

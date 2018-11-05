@@ -1,3 +1,4 @@
+
 \documentclass[a4paper,twoside,openright]{article}
 \usepackage{amsmath}
 \begin{document}
@@ -84,3 +85,38 @@ Where,
 
 \end{document}
 
+%
+%Fly stocks and rearing conditions
+%Flies were raised under a 12 h light:12 h dark (LD) regimen at 25 ℃ on standard corn and yeast media. CantonS from Ralf Stanewsky (University of Münster, Germany) were employed for all experiments. All analysed animals were socially naive, unless otherwise stated.
+%Behavioural experiments
+%For all experiments, 7-8 days old pupae were sorted into glass tubes (70×5×3 mm [length × external diameter × internal diameter]) containing the same food used for rearing. After eclosion, animals were sorted according to sex and then the tubes were loaded into ethoscopes “sleep arenas” (1) (20 animals per device). Three days of baseline were recorded before any treatment. All experiments were carried out under LD condition, 50-70% humidity, in incubators set at 25 ℃ and with ad libitum access to regular food. Animals that died during the experiment were excluded from the analysis, except for the longevity experiments. 
+%To evaluate the effect of mating on sleep (Fig. 3), a naive male was introduced in the tube of each naive female and allowed to interact for 2 h, from ZT06 to ZT08 (zeitgeber time). After the interaction, males were removed and the activity profile of the females was recorded for another 3.5 days. The short duration of the interaction and the restrictive space of the glass tube reduces the probability of mating and only about 50% of the flies underwent successful mating. This setup provides the two necessary groups: mated females and females that were courted, but not mated. Effective mating was scored as the presence of larvae in the food four days after the interaction. 
+%The “rotational module” of the ethoscope platform was used to perform the 12 h dynamic sleep deprivation treatments shown in Figure 5. Different durations of immobility were employed to trigger the rotation of the tube, as listed in the figure (from 10 s to 1000 s).
+%The effects of long lasting dynamic sleep deprivation shown in Figures 4 and 6 were tested using the “optomotor module”, programmed with a 20 seconds immobility trigger. Once a week, flies were transferred to fresh tube in order to ensure good quality food during the entire experiment. For the experiment shown in Figure 6,  sleep deprivation was stopped after 9.5 days of treatment and animals were allowed to recover for 3 days in the ethoscopes at 25 ℃ to measure sleep rebound.
+%
+%
+%For the experiment shown in Figure 1C, behaviour of both males and females was recorded for seven days, then transferred to fresh tubes and recorded for another seven days. In order to avoid confounding effects related to the location of the tube on sleep amount (e.g. an ethoscope and incubator), the new position of all the tubes was systematically interspersed (2). Namely, low and high sleepers from the same experiment and sex were paired as neighbours in a new arena and their behaviour was recorded for another week. Comparison was between days 2-7 and 8-13, ignoring the first day, and the day after the change of.
+%
+%Behavioural scoring
+%Immobility was scored by thresholding maximal velocity on ten second epochs, as previously described (1). Sleep was computed using the so-called five minute rule, according to which all immobility bouts longer than 300 s were counted as sleep bouts (including the first 300 s). During mechanical sleep deprivation, velocity measurements subsequent to stimuli were masked in order to avoid false positive of fly movement (1). Specifically, data in the six seconds following the onset of each rotation were not considered for sleep scoring. 
+%Sleep rebound shown in figure 5D and H  was expressed as the difference between the sleep amount measured during rebound and the expected sleep amount.  Expected sleep amounts were inferred by a linear regression between the reference baseline sleep and sleep during the rebound period, in the relevant control population.
+%<Include “Rebound calculation” section from method_equations.tex>
+%Behavioural state (“quiescence”, “micro-movement” and “walking”) was defined for each consecutive minute of behaviour (B) according to the following rule:
+%<Include “Behavioural state” section from method_equations.tex>
+%Due to the different amount of food and cotton wool in each tube, the space available inside each experimental tube may be slightly different between individual animals.  In order to compare flies position with respect to the boundary of their respective experimental environments, the animal longitudinal position was expressed relatively to the food (position = 0) and the cotton wool (position = 1)  edges:
+%<Include “Relative position” section from method_equations.tex>
+%
+%Dendrograms and hierarchical clustering
+%The dendrograms in Fig 3D and S2A are the result of a hierarchical clustering using the Unweighted Pair Group Method with Arithmetic Mean (UPGMA) method (3).
+%During an interval of time, the proportion of time spent by an animal in a behavioural state can be formulated as an empirical discrete probability density function. In this context, the distance between each pair of animal was computed using the average of Bhattacharyya distances (4) over the entire day:
+%
+%<Include “Hierarchical clustering” section from method_equations.tex>
+%
+%Statistics
+%Unless otherwise stated, the shaded areas around the mean (e.g. Fig. 3A and B), and the error bars (e.g. Fig. 5B-D and F-H) are 95% confidence interval computed using basic bootstrap resampling (5) with N=1000. Median lifespan confidence intervals were estimated  accounting for censored data.
+%Linear models
+%The lines in figures 1C and 2B are linear regression and the shaded areas are 95% parametric confidence intervals.
+%Survival curves
+%Figure 4B and C are Kaplan-Meier curves. The shaded areas represent a 95% confidence interval.
+%Software
+%All data analysis was performed in R using the rethomics framework (6). Figures were drawn using ggplot2 (7) and ternary representations in figures 2E and 3C were generated with ggtern  (8).
