@@ -163,7 +163,12 @@ all_pl_objs$etho_stimuli_rel <- ggetho(dt[t > days(1) &  t < days(10) & xmv(trea
                                     aes(y = (interactions / 10) / (1/as.numeric(interval))),
                                     summary_FUN = mean, time_wrap= hours(24)) +
                                   layers(annotate=F) + scale_y_continuous(name="N_interactions / N_maximum" ,limits = c(NA,NA)) + coord_cartesian(xlim = c(days(0),days(1)))
-all_pl_objs$etho_stimuli_rel
+
+
+all_pl_objs$etho_stimuli_rel_day_7_to_10 <- ggetho(dt[t > days(7) &  t < days(10) & xmv(treatment) == "SD"],
+                                    aes(y = (interactions / 10) / (1/as.numeric(interval))),
+                                    summary_FUN = mean, time_wrap= hours(24)) +
+                                  layers(annotate=F) + scale_y_continuous(name="N_interactions / N_maximum" ,limits = c(NA,NA)) + coord_cartesian(xlim = c(days(0),days(1)))
 
 
 dt[, distance := abs(c(0, diff(x))), by=id]
@@ -178,6 +183,13 @@ all_pl_objs$etho_distance_wrapped <- ggetho(dt[t > days(1) &  t < days(10) & xmv
                                     summary_FUN = sum,  time_wrap= hours(24)) +  
 									layers() + scale_y_continuous(limits = c(NA,NA)) +
 									coord_cartesian(xlim = c(days(0),days(1)))
+
+all_pl_objs$etho_distance_wrapped_day_7_to_10 <- ggetho(dt[t > days(7) &  t < days(10) & xmv(sdi) %in% c(0,10)],
+                                    aes(y = distance / 3, fill=treatment),
+                                    summary_FUN = sum,  time_wrap= hours(24)) +  
+									layers() + scale_y_continuous(limits = c(NA,NA)) +
+									coord_cartesian(xlim = c(days(0),days(1)))
+
 
 
 
@@ -364,14 +376,6 @@ cor.test(corr_dt$lifespan_baseline, corr_dt$interactions, method="spearman")
 dev.off()
 
 
-pdf("prolonged_sd_rebound.pdf", w=12,h=6)
-for(p_name in names(all_pl_objs)){
-    pl <- all_pl_objs[[which(names(all_pl_objs) == p_name)]]
-    print(pl + ggtitle(p_name))
-}
-dev.off()
-
-
 stim_dt <- dt[t > days(1) &  t < days(10) & xmv(treatment) == "SD"]
 
 stim_dt <-behavr::bin_apply_all(stim_dt, y=interactions, x_bin_length=mins(30), FUN=sum)
@@ -380,14 +384,42 @@ stim_simple_dt <- rejoin(stim_dt)[, .(N_stimuli = mean(interactions)), by="t,sex
 
 ggplot(stim_simple_dt, aes(x=t, y=N_stimuli, colour=sex)) + geom_line()
 
-pdf("seasonal_decomposition_N_stimulus.pdf", w=8, h=4.5)
+
 tmp_ts <- ts(stim_simple_dt[sex=="M", N_stimuli],  frequency=48) # 48 obervations a day
 s <- stl(tmp_ts,s.window="per")
 apply(s$time.series,2, var) / var(tmp_ts)
 plot(s)
+ts <- s$time.series
+dt_f <- data.table(interactions = ts[, "trend"], t = time(ts) * days(1), sex="M")
 
 tmp_ts <- ts(stim_simple_dt[sex=="F", N_stimuli],  frequency=48) # 48 obervations a day
 s <- stl(tmp_ts,s.window="per")
 apply(s$time.series,2, var) / var(tmp_ts)
 plot(s)
+ts <- s$time.series
+dt_m <- data.table(interactions = ts[, "trend"], t = time(ts) * days(1), sex="F")
+
+
+all_pl_objs$etho_stimuli_2 <- ggetho(dt[xmv(sdi) == 10 & t > days(1) & t < days(10)],
+                                    aes(y = interactions, fill=sex),
+                                    summary_FUN = sum) +
+                                    stat_pop_etho(method= mean_cl_boot, linetype=2) +
+									stat_ld_annotations() + scale_y_continuous(limits = c(NA,NA)) +
+									scale_fill_manual(values=FEMALE_MALE_PALETTE) +scale_colour_manual(values=FEMALE_MALE_PALETTE) +
+									geom_line(data=rbind(dt_f, dt_m),  size=2) +
+									ethogram_theme
+
+all_pl_objs$etho_stimuli_2
+
+
+
+
+pdf("prolonged_sd_rebound.pdf", w=12,h=6)
+for(p_name in names(all_pl_objs)){
+	print(p_name)
+    pl <- all_pl_objs[[which(names(all_pl_objs) == p_name)]]
+    print(pl + ggtitle(p_name))
+}
 dev.off()
+
+
