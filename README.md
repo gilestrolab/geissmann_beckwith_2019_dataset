@@ -37,16 +37,9 @@
 	3. `ternary_plot.pdf`, page 10 -- summary of 1., wraped in one figure.
 	4. `ternary_plot.pdf`, page 1 and `ternary_female_path.pdf`, page 1 -- suggested figure legend for 2.
 	5. `ternary_plot.pdf`, page 2-9 -- like 2. but for different population quantiles (based on sleep amount)
-<<<<<<< HEAD
-<<<<<<< HEAD
 	6. `ternary_plot.pdf`, page 11 -- Overall relative position of animals given their behaviour and sex. For females, micro-mov. is on the food!
 	7. `sleep_dam_overestimate.pdf` page 1 -- relationship between dam-scored and ethoscope-scored sleep (global average, L+D). We also show overall proportion of micromovement as dot size
-=======
-	
->>>>>>> ad95bd0e2e80b63e427104d671dd03862af1b82c
-=======
-	
->>>>>>> ad95bd0e2e80b63e427104d671dd03862af1b82c
+
 ## Fig 3, virgin vs mated females
 
 * summary : Effect of mating on female sleep/quiescence
