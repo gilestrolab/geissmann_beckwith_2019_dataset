@@ -5,7 +5,7 @@ Code and metadata for [Quentin Geissmann\*, Esteban J. Beckwith\* and Giorgio F.
 
 ## Fig. 1: Great variability in sleep amounts in a nonmutant population of D. melanogaster
 
-[![Fig. 1](https://www.science.org/cms/10.1126/sciadv.aau9253/asset/4d789d1b-8566-4b23-8548-7a3244cd3449/assets/graphic/aau9253-f1.jpeg)](https://www.science.org/cms/10.1126/sciadv.aau9253/asset/4d789d1b-8566-4b23-8548-7a3244cd3449/assets/graphic/aau9253-f1.jpeg)
+![Fig. 1](figures/fig-1.png)
 
 * summary: Descending sorted distribution of sleep amount in females (A) and males (B). Panel C shows that sleep amount measured in a tube predicts sleep amount measured in a different tube.
 * **Panels A-B**: experiment -- `20160404_overnight_dsd`, script -- `baseline.R`
@@ -19,7 +19,7 @@ Code and metadata for [Quentin Geissmann\*, Esteban J. Beckwith\* and Giorgio F.
 
 ## Fig. 2: Micromovements account for the newly described short-sleeping phenotype
 
-[![Fig. 2](https://www.science.org/cms/10.1126/sciadv.aau9253/asset/363f0976-c3d5-410a-bca6-8f254cbf02c8/assets/graphic/aau9253-f2.jpeg)](https://www.science.org/cms/10.1126/sciadv.aau9253/asset/363f0976-c3d5-410a-bca6-8f254cbf02c8/assets/graphic/aau9253-f2.jpeg)
+![Fig. 2](figures/fig-2.png)
 
 * summary: Average behavioral occurrence over 24h (A), ethoscope vs vDAM sleep comparison (B), sleep over 24h with both methods (C), positional distribution (D), and ternary plot representation (E).
 * experiment -- `20160404_overnight_dsd`
@@ -34,7 +34,7 @@ Code and metadata for [Quentin Geissmann\*, Esteban J. Beckwith\* and Giorgio F.
 
 ## Fig. 3: Mating reduces sleep amount
 
-[![Fig. 3](https://www.science.org/cms/10.1126/sciadv.aau9253/asset/fdcb372b-94c7-4132-8c17-424ccd4881a7/assets/graphic/aau9253-f3.jpeg)](https://www.science.org/cms/10.1126/sciadv.aau9253/asset/fdcb372b-94c7-4132-8c17-424ccd4881a7/assets/graphic/aau9253-f3.jpeg)
+![Fig. 3](figures/fig-3.png)
 
 * summary: Sleep profile of mated vs non-mated females (A), average position (B), ternary representation (C), and hierarchical clustering (D).
 * experiment -- `20170814_virgin_vs_mated`
@@ -48,7 +48,7 @@ Code and metadata for [Quentin Geissmann\*, Esteban J. Beckwith\* and Giorgio F.
 
 ## Fig. 4: Chronic mechanical sleep deprivation is largely not lethal in D. melanogaster
 
-[![Fig. 4](https://www.science.org/cms/10.1126/sciadv.aau9253/asset/1dbfb859-c785-4d37-a04a-28e81d0f9bef/assets/graphic/aau9253-f4.jpeg)](https://www.science.org/cms/10.1126/sciadv.aau9253/asset/1dbfb859-c785-4d37-a04a-28e81d0f9bef/assets/graphic/aau9253-f4.jpeg)
+![Fig. 4](figures/fig-4.png)
 
 * summary: Lifelong sleep restriction with 20s inactivity trigger (A), survival curves for males (B) and females (C), and sleep vs lifespan correlation (D).
 * experiment -- `20180305_sd_until_death`
@@ -62,7 +62,7 @@ Code and metadata for [Quentin Geissmann\*, Esteban J. Beckwith\* and Giorgio F.
 
 ## Fig. 5: Sleep rebound is not linearly proportional to sleep loss
 
-[![Fig. 5](https://www.science.org/cms/10.1126/sciadv.aau9253/asset/b590bc23-6155-4354-a660-4ad526a391bc/assets/graphic/aau9253-f5.jpeg)](https://www.science.org/cms/10.1126/sciadv.aau9253/asset/b590bc23-6155-4354-a660-4ad526a391bc/assets/graphic/aau9253-f5.jpeg)
+![Fig. 5](figures/fig-5.png)
 
 * summary: 12h overnight sleep deprivation with 10 different interval triggers (20-1000s). Sleep profiles (A, E), sleep/immobility quantification (B, F), stimuli counts (C, G), rebound quantification (D, H).
 * experiment -- `20160404_overnight_dsd`
@@ -83,7 +83,7 @@ Code and metadata for [Quentin Geissmann\*, Esteban J. Beckwith\* and Giorgio F.
 
 ## Fig. 6: Sleep pressure is largely under the control of the circadian rhythm
 
-[![Fig. 6](https://www.science.org/cms/10.1126/sciadv.aau9253/asset/e34df9a0-c9f7-4873-b8f9-742170cdab19/assets/graphic/aau9253-f6.jpeg)](https://www.science.org/cms/10.1126/sciadv.aau9253/asset/e34df9a0-c9f7-4873-b8f9-742170cdab19/assets/graphic/aau9253-f6.jpeg)
+![Fig. 6](figures/fig-6.png)
 
 * summary: 9.5-day (228h) sleep deprivation with 20s intervals. Sleep profiles (A, B), rebound magnification (C, D), rebound quantification (C', D'), activity (E), rotations over time (F), CaLexA quantification (G).
 * experiment -- `20170209_prolonged_sd`
