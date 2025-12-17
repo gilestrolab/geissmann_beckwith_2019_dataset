@@ -1,196 +1,209 @@
-Code and metadata for [Quentin Geissmann*, Esteban J. Beckwith* and Giorgio F. Gilestro, 2019](https://advances.sciencemag.org/content/5/2/eaau9253)
+Code and metadata for [Quentin Geissmann\*, Esteban J. Beckwith\* and Giorgio F. Gilestro, 2019](https://advances.sciencemag.org/content/5/2/eaau9253)
 
-# Figure layout and reference for the manuscript
-
-
-## Fig 1, baseline sleep/quiescence
+# Figure reference for the published manuscript
 
 
-* summary : Undisturbed baseline behaviour for four full days males vs females.
+## Fig. 1: Great variability in sleep amounts in a nonmutant population of D. melanogaster
+
+[![Fig. 1](https://www.science.org/cms/10.1126/sciadv.aau9253/asset/4d789d1b-8566-4b23-8548-7a3244cd3449/assets/graphic/aau9253-f1.jpeg)](https://www.science.org/cms/10.1126/sciadv.aau9253/asset/4d789d1b-8566-4b23-8548-7a3244cd3449/assets/graphic/aau9253-f1.jpeg)
+
+* summary: Descending sorted distribution of sleep amount in females (A) and males (B). Panel C shows that sleep amount measured in a tube predicts sleep amount measured in a different tube.
+* **Panels A-B**: experiment -- `20160404_overnight_dsd`, script -- `baseline.R`
+* **Panel C**: experiment -- `20170109_tube_change_and_var`, script -- `script.R`
+* Ns: N_F = 881, N_M = 485 (panels A-B); N_F = 242, N_M = 242 (panel C)
+* figure material:
+	1. `20160404_overnight_dsd/sorted_baseline_overview.pdf`, pages 1 & 2 -- distribution of individual **sleep** in **females**
+	2. `20160404_overnight_dsd/sorted_baseline_overview.pdf`, pages 3 & 4 -- distribution of individual **sleep** in **males**
+	3. `20170109_tube_change_and_var/tube_change_correlations.pdf`, page 1 -- **sleep** fraction after vs before tube change/shuffling
+
+
+## Fig. 2: Micromovements account for the newly described short-sleeping phenotype
+
+[![Fig. 2](https://www.science.org/cms/10.1126/sciadv.aau9253/asset/363f0976-c3d5-410a-bca6-8f254cbf02c8/assets/graphic/aau9253-f2.jpeg)](https://www.science.org/cms/10.1126/sciadv.aau9253/asset/363f0976-c3d5-410a-bca6-8f254cbf02c8/assets/graphic/aau9253-f2.jpeg)
+
+* summary: Average behavioral occurrence over 24h (A), ethoscope vs vDAM sleep comparison (B), sleep over 24h with both methods (C), positional distribution (D), and ternary plot representation (E).
 * experiment -- `20160404_overnight_dsd`
 * script -- `baseline.R`
-* Ns: N_M =  485, N_F = 881
-* figure material: 
-	1. `overnight_dsd_baseline.pdf`, page 1 -- **sleep** fraction.
-	2. `overnight_dsd_baseline.pdf`, page 2 -- **quiescence** (i.e. not moving) fraction.
-	3. `overnight_dsd_baseline.pdf`, page 3 --  like 1., but wrapped over 24h
-	4. `overnight_dsd_baseline.pdf`, page 4 --  like 2., but wrapped over 24h
-	5. `sorted_baseline_overview.pdf`, pages 1 & 2 -- distribution of individual **sleep** in **females**
-	6. `sorted_baseline_overview.pdf`, pages 3 & 4 -- distribution of individual **sleep** in **males**
-	7. `sorted_baseline_overview.pdf`, pages 5 & 6 -- distribution of individual **quiescence** in **females**
-	8. `sorted_baseline_overview.pdf`, pages 7 & 8 -- distribution of individual **quiescence** in **males**
-	9. `sorted_baseline_overview.svg` example of how to put figures marginal distribution and overview together
-	10. `sorted_baseline_overview.pdf`, page 9 -- like page 2. but showing the 19 females for which we have a video
-	11. `sorted_baseline_overview.pdf`, page 10 -- the 19 picked females, as an overview plot. The names on the y axis indicates where to find the video. It reads `<experiment_id>|<region_id> -> <video_id>|<region_id>`
-	
-	
-	
-	
-## Fig 2, baseline ternary  plots
+* Ns: Same dataset as Fig. 1 (A and B)
+* figure material:
+	1. `overnight_dsd_baseline.pdf`, page 3 -- sleep fraction wrapped over 24h (panel C, continuous lines)
+	2. `sleep_dam_overestimate.pdf`, page 1 -- relationship between DAM-scored and ethoscope-scored sleep (panel B). Dot size shows micromovement proportion
+	3. `ternary_plots.pdf`, page 10 -- summary ternary plot (panel E)
+	4. `ternary_plots.pdf`, page 11 -- positional distribution of behaviors by sex (panel D)
 
 
-* summary : same data as fig 1. Introducing the triangle.
-* experiment -- `20160404_overnight_dsd`
-* script -- `baseline.R`
-* Ns are as above
-* figure material: 
-	1. `overnight_dsd_baseline.pdf`, page 5 --  individual fine grain behaviour for the 19 females (see fig 1), over 48h day, 1min resolution (same data as used in triangle, linking figure 1 and 2).	
-	2. `ternary_plot_video.pdf`, all pages -- location in behavioural space for each animal (average across days to wrap on circadian time) 15min /page. Suggested conversion to gif: `convert -delay 20 -density 200x200  -loop 0  ternary_plot_video.pdf  -background white  -alpha remove -alpha off  -coalesce -layers optimize  ternary_plot.gif`
-	3. `ternary_plot.pdf`, page 10 -- summary of 1., wraped in one figure.
-	4. `ternary_plot.pdf`, page 1 and `ternary_female_path.pdf`, page 1 -- suggested figure legend for 2.
-	5. `ternary_plot.pdf`, page 2-9 -- like 2. but for different population quantiles (based on sleep amount)
-	6. `ternary_plot.pdf`, page 11 -- Overall relative position of animals given their behaviour and sex. For females, micro-mov. is on the food!
-	7. `sleep_dam_overestimate.pdf` page 1 -- relationship between dam-scored and ethoscope-scored sleep (global average, L+D). We also show overall proportion of micromovement as dot size
+## Fig. 3: Mating reduces sleep amount
 
-## Fig 3, virgin vs mated females
+[![Fig. 3](https://www.science.org/cms/10.1126/sciadv.aau9253/asset/fdcb372b-94c7-4132-8c17-424ccd4881a7/assets/graphic/aau9253-f3.jpeg)](https://www.science.org/cms/10.1126/sciadv.aau9253/asset/fdcb372b-94c7-4132-8c17-424ccd4881a7/assets/graphic/aau9253-f3.jpeg)
 
-* summary : Effect of mating on female sleep/quiescence
+* summary: Sleep profile of mated vs non-mated females (A), average position (B), ternary representation (C), and hierarchical clustering (D).
 * experiment -- `20170814_virgin_vs_mated`
 * script -- `script.R`
-* N_mated > 85, N_virgin > 150
-* figure material: 
-	1. `virgin_vs_mated.pdf`, page 1 -- **sleep** fraction. 
-	2. `virgin_vs_mated.pdf`, page 2 -- **quiescence** fraction.
-	3. `virgin_vs_mated.pdf`, page 3 -- **position** 0 <=> food, 1 <=> cotton wool.
-	4. `virgin_vs_mated.pdf`, page 4 --  like 1., but wrapped over 24h (post-mating data only)
-	5. `virgin_vs_mated.pdf`, page 5 --  like 2., but wrapped over 24h (post-mating data only)
-	6. `virgin_vs_mated-ternary_plots.pdf`, page 2 --  ternary plot post-mating. `FALSE` and `TRUE` (i.e. left and right) facets are for virgin and mated, respectively.
+* Ns: N_mated = 86, N_virgin = 152
+* figure material:
+	1. `virgin_vs_mated.pdf`, page 1 -- **sleep** fraction (panel A)
+	2. `virgin_vs_mated.pdf`, page 3 -- **position** 0 <=> food, 1 <=> cotton wool (panel B)
+	3. `virgin_vs_mated-ternary_plots.pdf`, page 2 -- ternary plot post-mating (panel C)
 
-## Fig 4, Sleep deprivation, 12h overnight.
 
-* summary : Effect of sleep deprivation with 10 different (20 - 1000s) intervals.
+## Fig. 4: Chronic mechanical sleep deprivation is largely not lethal in D. melanogaster
+
+[![Fig. 4](https://www.science.org/cms/10.1126/sciadv.aau9253/asset/1dbfb859-c785-4d37-a04a-28e81d0f9bef/assets/graphic/aau9253-f4.jpeg)](https://www.science.org/cms/10.1126/sciadv.aau9253/asset/1dbfb859-c785-4d37-a04a-28e81d0f9bef/assets/graphic/aau9253-f4.jpeg)
+
+* summary: Lifelong sleep restriction with 20s inactivity trigger (A), survival curves for males (B) and females (C), and sleep vs lifespan correlation (D).
+* experiment -- `20180305_sd_until_death`
+* script -- `rebound-final.R`
+* Ns: n = 38-40 per group
+* figure material:
+	1. `life_long_sd.pdf` -- lifelong sleep restriction (panel A)
+	2. `sd_until_death_surv.pdf` -- survival curves (panels B, C)
+	3. `sleep_predicts_life.pdf` -- sleep amount vs lifespan correlation (panel D)
+
+
+## Fig. 5: Sleep rebound is not linearly proportional to sleep loss
+
+[![Fig. 5](https://www.science.org/cms/10.1126/sciadv.aau9253/asset/b590bc23-6155-4354-a660-4ad526a391bc/assets/graphic/aau9253-f5.jpeg)](https://www.science.org/cms/10.1126/sciadv.aau9253/asset/b590bc23-6155-4354-a660-4ad526a391bc/assets/graphic/aau9253-f5.jpeg)
+
+* summary: 12h overnight sleep deprivation with 10 different interval triggers (20-1000s). Sleep profiles (A, E), sleep/immobility quantification (B, F), stimuli counts (C, G), rebound quantification (D, H).
 * experiment -- `20160404_overnight_dsd`
 * script -- `rebound.R`
-* N > 45 / treatment * sex (see last page)
-* figure material: 
-	1. `overnight_dsd_rebound.pdf`, page 1 -- **sleep** fraction **20s vs control**.
-	2. `overnight_dsd_rebound.pdf`, page 2 -- **sleep** fraction **20s vs control**, zoomed in.
-	3. `overnight_dsd_rebound.pdf`, page 3 -- **sleep** fraction **all vs control**
-	4. `overnight_dsd_rebound.pdf`, page 4 -- **quiescence** fraction **20s vs control**.
-	5. `overnight_dsd_rebound.pdf`, page 5 -- **quiescence** fraction **20s vs control**, zoomed in.
-	6. `overnight_dsd_rebound.pdf`, page 6 -- **quiescence** fraction **all vs control**
-	7. `overnight_dsd_rebound.pdf`, page 7 -- **absolute number of stimuli** **20s vs control**.
-	8. `overnight_dsd_rebound.pdf`, page 8 -- **absolute number of stimuli** **20s vs control**, zoomed in.
-	9. `overnight_dsd_rebound.pdf`, page 9 -- **absolute number of stimuli** **all vs control**
-	10. `overnight_dsd_rebound.pdf`, page 10 -- same as 7., but **relative** to theoritical max num of stimuli
-	11. `overnight_dsd_rebound.pdf`, page 11 -- same as 8., but **relative** to theoritical max num of stimuli
-	12. `overnight_dsd_rebound.pdf`, page 12 -- same as 9., but **relative** to theoritical max num of stimuli
-	13. `overnight_dsd_rebound.pdf`, page 15 & 16 -- sleep amount in the 3 (page 15) or 6 hours following SD (ZT 0-[3|6]). Bootstrap error bars
-	14. `overnight_dsd_rebound.pdf`, page 21 -- observed quiescence -  predicted quiescence in 3h (in min). Groups are to be compared to red dotted line (see lab meeting 20171102) the expectation. Stats are uncorrected Wilcoxon (unpaired) tests. 
-	15. `overnight_dsd_rebound.pdf`, page 22 -- Probability of having a rebound (as defined above) > 0 in 3h (in min). Groups are to be compared to red line (50%), the expectation. Stats are uncorrected Binomial tests.
+* Ns: N_M = 818, N_F = 912; N > 45 / treatment * sex
+* figure material:
+	1. `overnight_dsd_rebound.pdf`, page 1 -- **sleep** fraction **20s vs control**
+	2. `overnight_dsd_rebound.pdf`, page 2 -- **sleep** fraction **20s vs control**, zoomed in
+	3. `overnight_dsd_rebound.pdf`, page 3 -- **sleep** fraction **all intervals vs control**
+	4. `overnight_dsd_rebound.pdf`, page 4 -- **quiescence** fraction **20s vs control**
+	5. `overnight_dsd_rebound.pdf`, page 5 -- **quiescence** fraction **20s vs control**, zoomed in
+	6. `overnight_dsd_rebound.pdf`, page 6 -- **quiescence** fraction **all intervals vs control**
+	7. `overnight_dsd_rebound.pdf`, page 7 -- **absolute number of stimuli** **20s vs control**
+	8. `overnight_dsd_rebound.pdf`, page 8 -- **absolute number of stimuli** **20s vs control**, zoomed in
+	9. `overnight_dsd_rebound.pdf`, page 9 -- **absolute number of stimuli** **all intervals vs control**
+	10. `overnight_dsd_rebound.pdf`, page 15 & 16 -- sleep amount in 3h or 6h following SD (ZT 0-3 or ZT 0-6). Bootstrap error bars
 
-## Fig 5, prolonged SD.
 
-* summary : Effect of 9.5 days sleep deprivation 20s intervals.
+## Fig. 6: Sleep pressure is largely under the control of the circadian rhythm
+
+[![Fig. 6](https://www.science.org/cms/10.1126/sciadv.aau9253/asset/e34df9a0-c9f7-4873-b8f9-742170cdab19/assets/graphic/aau9253-f6.jpeg)](https://www.science.org/cms/10.1126/sciadv.aau9253/asset/e34df9a0-c9f7-4873-b8f9-742170cdab19/assets/graphic/aau9253-f6.jpeg)
+
+* summary: 9.5-day (228h) sleep deprivation with 20s intervals. Sleep profiles (A, B), rebound magnification (C, D), rebound quantification (C', D'), activity (E), rotations over time (F), CaLexA quantification (G).
 * experiment -- `20170209_prolonged_sd`
 * script -- `rebound.R`
-* N > 90 / treatment * sex (see last page)
-* figure material: 
-	1. `prolonged_sd_rebound.pdf`, page 1 -- **sleep** fraction **20s vs control**.
-	2. `prolonged_sd_rebound.pdf`, page 2 -- **sleep** fraction **20s vs control**, zoomed in.
-	3. `prolonged_sd_rebound.pdf`, page 3 -- **quiescence** fraction **20s vs control**.
-	4. `prolonged_sd_rebound.pdf`, page 4 -- **quiescence** fraction **20s vs control**, zoomed in.
-	5. `prolonged_sd_rebound.pdf`, page 5 -- **absolute number of stimuli** **20s vs control**.
-	6. `prolonged_sd_rebound.pdf`, page 6 -- **absolute number of stimuli** **20s vs control**, zoomed in.
-	7. `prolonged_sd_rebound.pdf`, page 8 -- **relative number of stimuli** (max = one each 20s) for the 20s interval group. wrapped over circadiand day, from `t = days(1)`.
-	8. `prolonged_sd_rebound.pdf`, page 9 & 10 -- sleep amount in the 3 (page 15) or 6 hours following SD (ZT 0-[3|6]). Bootstrap error bars.
-	9. `prolonged_sd_rebound.pdf`, page 15 -- observed quiescence -  predicted quiescence in 3h (in min). Groups are to be compared to red line, the expectation. Stats are uncorrected Wilcoxon (unpaired) tests.  #TODO  express in min #TODO  add some alpha
-	10. `prolonged_sd_rebound.pdf`, page 16 -- Probability of having a rebound (as defined above) > 0 in 3h (in min). Groups are to be compared to red line (50%), the expectation. Stats are uncorrected Binomial tests.
-	11. `prolonged_sd_surv.pdf`, page 1 -- Survival curve (includes animals that died before rebound, which are no in sleep trace data)
-	
+* Ns: n = 93-95 per group
+* figure material:
+	1. `prolonged_sd_rebound.pdf`, page 1 -- **sleep** fraction **20s vs control**
+	2. `prolonged_sd_rebound.pdf`, page 2 -- **sleep** fraction **20s vs control**, zoomed in
+	3. `prolonged_sd_rebound.pdf`, page 3 -- **quiescence** fraction **20s vs control**
+	4. `prolonged_sd_rebound.pdf`, page 4 -- **quiescence** fraction **20s vs control**, zoomed in
+	5. `prolonged_sd_rebound.pdf`, page 5 -- **absolute number of stimuli** **20s vs control**
+	6. `prolonged_sd_rebound.pdf`, page 6 -- **absolute number of stimuli** **20s vs control**, zoomed in
+	7. `prolonged_sd_rebound.pdf`, page 8 -- **relative number of stimuli** wrapped over circadian day
+	8. `prolonged_sd_rebound.pdf`, page 9 & 10 -- sleep amount in 3h or 6h following SD. Bootstrap error bars
+	9. `prolonged_sd_surv.pdf`, page 1 -- Survival curve
 
-# Supplementary figures
 
-## Sup fig A: DSD for 4 hours only
+# Supplementary Figures
 
-* summary : Effect of dynamic sleep deprivation from zt 20 to 24.
+## Fig. S1: Representative tracings of behavioral activity
+
+* summary: 48h behavioral activity as recorded by ethoscopes for all 881 female flies shown in Fig. 1A.
+* experiment -- `20160404_overnight_dsd`
+* script -- `baseline.R`
+* figure material:
+	1. `overnight_dsd_baseline.pdf`, page 5 -- individual fine-grain behaviour for 19 females over 48h, 1min resolution
+
+
+## Fig. S2: Sorted hierarchical cluster analysis
+
+* summary: Supplement to Fig. 3 - hierarchical clustering based on pairwise distance.
+* experiment -- `20170814_virgin_vs_mated`
+* script -- `script.R`
+
+
+## Fig. S3: Decrease in locomotion activity in sleep-deprived flies
+
+* summary: Possible sign of physical fatigue in SD flies over time.
+* experiment -- `20180305_sd_until_death`
+* script -- `rebound-final.R`
+
+
+## Fig. S4: Circadian rhythm vs homeostatic drive
+
+* summary: Circadian rhythm, not homeostatic drive, is the major contributor to sleep pressure during long-term SD.
+* experiment -- `20170209_prolonged_sd`
+* script -- `rebound.R`
+* figure material:
+	1. `prolonged_sd_rebound.pdf`, page 15 -- observed quiescence - predicted quiescence in 3h (min)
+	2. `prolonged_sd_rebound.pdf`, page 16 -- Probability of positive rebound
+
+
+# Additional unpublished analyses
+
+The following experiments were conducted but not included in the final publication.
+
+## DSD for 4 hours only (ZT 20-24)
+
 * experiment -- `20160722_time_window_dsd`
 * script -- `rebound.R`
-* N > 50 / treatment * sex (see last page)
-* figure material: 
-	1. `time_window_dsd_rebound.pdf`, page 1 -- **sleep** fraction **20s vs control**.
-	2. `time_window_dsd_rebound.pdf`, page 2 -- **sleep** fraction **20s vs control**, zoomed in.
-	3. `time_window_dsd_rebound.pdf`, page 3 -- **quiescence** fraction **20s vs control**.
-	4. `time_window_dsd_rebound.pdf`, page 4 -- **quiescence** fraction **20s vs control**, zoomed in.
-	5. `time_window_dsd_rebound.pdf`, page 5 -- **absolute number of stimuli** **20s vs control**.
-	6. `time_window_dsd_rebound.pdf`, page 6 -- **absolute number of stimuli** **20s vs control**, zoomed in.
-	8. `time_window_dsd_rebound.pdf`, page 9 & 10 -- sleep amount in the 3 (page 15) or 6 hours following SD (ZT 0-[3|6]). Bootstrap error bars.
-	9. `time_window_dsd_rebound.pdf`, page 15 -- observed quiescence -  predicted quiescence in 3h (in min). Groups are to be compared to red line, the expectation. Stats are uncorrected Wilcoxon (unpaired) tests.  #TODO  express in min #TODO  add some alpha
-	10. `time_window_dsd_rebound.pdf`, page 16 -- Probability of having a rebound (as defined above) > 0 in 3h (in min). Groups are to be compared to red line (50%), the expectation. Stats are uncorrected Binomial tests.
-	
-
-	
-## Sup fig B: Static prolonged SD
+* N > 50 / treatment * sex
+* figure material:
+	1. `time_window_dsd_rebound.pdf`, page 1 -- **sleep** fraction **20s vs control**
+	2. `time_window_dsd_rebound.pdf`, page 2 -- **sleep** fraction **20s vs control**, zoomed in
+	3. `time_window_dsd_rebound.pdf`, page 3 -- **quiescence** fraction **20s vs control**
+	4. `time_window_dsd_rebound.pdf`, page 4 -- **quiescence** fraction **20s vs control**, zoomed in
+	5. `time_window_dsd_rebound.pdf`, page 5 -- **absolute number of stimuli** **20s vs control**
+	6. `time_window_dsd_rebound.pdf`, page 6 -- **absolute number of stimuli** **20s vs control**, zoomed in
 
 
-* summary : Effect of 9.5 days sleep deprivation 20s intervals.
-* experiment -- `20170209_prolonged_sd`
+## Systematic prolonged SD
+
+* experiment -- `20170321_systematic_prolonged_sd`
 * script -- `rebound.R`
-* N > 70 / treatment * sex (see last page)
-* figure material: 
-	1. `prolonged_sd_rebound.pdf`, page 1 -- **sleep** fraction **20s vs control**.
-	2. `prolonged_sd_rebound.pdf`, page 2 -- **sleep** fraction **20s vs control**, zoomed in.
-	3. `prolonged_sd_rebound.pdf`, page 3 -- **quiescence** fraction **20s vs control**.
-	4. `prolonged_sd_rebound.pdf`, page 4 -- **quiescence** fraction **20s vs control**, zoomed in.
-	5. `prolonged_sd_rebound.pdf`, page 5 -- **absolute number of stimuli** **20s vs control**.
-	6. `prolonged_sd_rebound.pdf`, page 6 -- **absolute number of stimuli** **20s vs control**, zoomed in.
-	7. `prolonged_sd_rebound.pdf`, page 8 -- **relative number of stimuli** (max = one each 20s) for the 20s interval group. wrapped over circadiand day, from `t = days(1)`.
-	8. `prolonged_sd_rebound.pdf`, page 9 & 10 -- sleep amount in the 3 (page 15) or 6 hours following SD (ZT 0-[3|6]). Bootstrap error bars.
-	9. `prolonged_sd_rebound.pdf`, page 15 -- observed quiescence -  predicted quiescence in 3h (in min). Groups are to be compared to red line, the expectation. Stats are uncorrected Wilcoxon (unpaired) tests.  #TODO  express in min #TODO  add some alpha
-	10. `prolonged_sd_rebound.pdf`, page 16 -- Probability of having a rebound (as defined above) > 0 in 3h (in min). Groups are to be compared to red line (50%), the expectation. Stats are uncorrected Binomial tests.
-	11. `prolonged_sd_surv.pdf`, page 1 -- Survival curve (incldes animals that died before rebound)
-	
-	
-	
-## Sup fig C, effect of changing the tube on behaviour conservation
-
-* summary : Changing tube and shuffeling location => sleep pattern conserved!
-* experiment -- `20170109_tube_change_and_var`
-* script -- `script.R`
-* N > 200 /  sex
-* figure material: 
-	1. `tube_change_correlations.pdf`, page 1 -- **sleep** fraction after vs before tube shcnage/shuffeling.
-	2. `tube_change_correlations.pdf`, page same as 1, but for *quiescence*.
-	
+* N > 70 / treatment * sex
+* figure material:
+	1. `prolonged_sd_rebound.pdf` -- various analyses
 
 
+## Sleep deprivation, 12h in L phase (ZT 0-12)
 
-# Undiscussed figures
-
-## Fig X, Sleep deprivation, 12h in L phase.
-
-
-* summary : Effect of dynamic sleep deprivation from zt 00 to 12.
 * experiment -- `20171017_dsd_l_phase`
 * script -- `rebound.R`
-* N > 60 / treatment * sex (see last page)
-* figure material: 
-	1. `l_phase_dsd_rebound.pdf`, page 1 -- **sleep** fraction **20s vs control**.
-	2. `l_phase_dsd_rebound.pdf`, page 2 -- **sleep** fraction **20s vs control**, zoomed in.
-	3. `l_phase_dsd_rebound.pdf`, page 3 -- **quiescence** fraction **20s vs control**.
-	4. `l_phase_dsd_rebound.pdf`, page 4 -- **quiescence** fraction **20s vs control**, zoomed in.
-	5. `l_phase_dsd_rebound.pdf`, page 5 -- **absolute number of stimuli** **20s vs control**.
-	6. `l_phase_dsd_rebound.pdf`, page 6 -- **absolute number of stimuli** **20s vs control**, zoomed in.
-	8. `l_phase_dsd_rebound.pdf`, page 9 & 10 -- TODO
-	9. `l_phase_dsd_rebound.pdf`, page 15 -- TODO
-	10. `l_phase_dsd_rebound.pdf`, page 16 -- TODO
-	
+* N > 60 / treatment * sex
+* figure material:
+	1. `l_phase_dsd_rebound.pdf`, page 1 -- **sleep** fraction **20s vs control**
+	2. `l_phase_dsd_rebound.pdf`, page 2 -- **sleep** fraction **20s vs control**, zoomed in
+	3. `l_phase_dsd_rebound.pdf`, page 3 -- **quiescence** fraction **20s vs control**
+	4. `l_phase_dsd_rebound.pdf`, page 4 -- **quiescence** fraction **20s vs control**, zoomed in
+	5. `l_phase_dsd_rebound.pdf`, page 5 -- **absolute number of stimuli** **20s vs control**
+	6. `l_phase_dsd_rebound.pdf`, page 6 -- **absolute number of stimuli** **20s vs control**, zoomed in
 
 
-## Fig Y, Sleep deprivation, 8h in L phase.
+## Sleep deprivation, 8h in L phase (ZT 0-8)
 
-
-* summary : Effect of dynamic sleep deprivation from zt 00 to 8.
 * experiment -- `20171017_dsd_zt0_8`
 * script -- `rebound.R`
-* N > 60 / treatment * sex (see last page)
-* figure material: 
-	1. `dsd_zt0_8_rebound.pdf`, page 1 -- **sleep** fraction **20s vs control**.
-	2. `dsd_zt0_8_rebound.pdf`, page 2 -- **sleep** fraction **20s vs control**, zoomed in.
-	3. `dsd_zt0_8_rebound.pdf`, page 3 -- **quiescence** fraction **20s vs control**.
-	4. `dsd_zt0_8_rebound.pdf`, page 4 -- **quiescence** fraction **20s vs control**, zoomed in.
-	5. `dsd_zt0_8_rebound.pdf`, page 5 -- **absolute number of stimuli** **20s vs control**.
-	6. `dsd_zt0_8_rebound.pdf`, page 6 -- **absolute number of stimuli** **20s vs control**, zoomed in.
-	8. `dsd_zt0_8_rebound.pdf`, page 9 & 10 -- TODO
-	9. `dsd_zt0_8_rebound.pdf`, page 15 -- TODO
-	10. `dsd_zt0_8_rebound.pdf`, page 16 -- TODO
+* N > 60 / treatment * sex
+* figure material:
+	1. `dsd_zt0_8_rebound.pdf`, page 1 -- **sleep** fraction **20s vs control**
+	2. `dsd_zt0_8_rebound.pdf`, page 2 -- **sleep** fraction **20s vs control**, zoomed in
+	3. `dsd_zt0_8_rebound.pdf`, page 3 -- **quiescence** fraction **20s vs control**
+	4. `dsd_zt0_8_rebound.pdf`, page 4 -- **quiescence** fraction **20s vs control**, zoomed in
+	5. `dsd_zt0_8_rebound.pdf`, page 5 -- **absolute number of stimuli** **20s vs control**
+	6. `dsd_zt0_8_rebound.pdf`, page 6 -- **absolute number of stimuli** **20s vs control**, zoomed in
+
+
+## fumin prolonged SD
+
+* experiment -- `20171016_fumin_prolonged_sd`
+* script -- `rebound.R`
+
+
+## Cross-experiment clustering
+
+* experiment -- `20180131_cross_xp_cluster`
+* script -- `cluster.R`
+
+
+## Movement control
+
+* experiment -- `20160722_movement_control`
+* script -- `rebound.R`
